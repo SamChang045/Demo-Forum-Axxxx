@@ -1,7 +1,17 @@
+<h1>Back Stage</h1>
 <div class="container">
   <div class="row">
   </div>
   <div class="row">
+    <%= form_for [:admin, @category], html: { class: "form-inline mb-3" } do |f| %>
+      <div class="form-group mr-3">
+        <%= f.text_field :name, placeholder: "Category Name", class: "form-control" %>
+      </div>
+      <%= f.submit class: "btn btn-primary" %>
+      <% if @category.errors.any? %>
+        <%= @category.errors.full_messages.to_sentence %>
+      <% end %>
+    <% end %>
     <table class="table table-hover">
       <thead class="thead-light">
         <tr>
