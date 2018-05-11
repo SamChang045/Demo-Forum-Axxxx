@@ -1,7 +1,15 @@
-<h1>Back Stage</h1>
 <div class="container">
   <div class="row">
+    <ul class="nav nav-tabs"> 
+      <li role="presentation" class="<%= "active" if current_page?(controller: 'categories', action:('index')) %>">
+        <%= link_to 'Categories', admin_categories_path %>
+      </li>
+      <li role="presentation" class="<%= "active" if current_page?(controller: 'users', action:('index')) %>">
+        <%= link_to 'Users', admin_users_path %>
+      </li>
+    </ul>
   </div>
+  <br>
   <div class="row">
     <%= form_for [:admin, @category], html: { class: "form-inline mb-3" } do |f| %>
       <div class="form-group mr-3">
