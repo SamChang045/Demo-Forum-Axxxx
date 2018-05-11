@@ -53,11 +53,14 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+# 使用者註冊登入用
 gem 'devise'
-gem 'carrierwave'
+# 分頁功能
 gem 'kaminari'
-
+# 前端套件
 gem 'bootstrap', '~> 4.0'
 gem 'jquery-rails'
-
+# 上傳檔案
+gem 'carrierwave'
+# 做假資料
 gem 'ffaker'
