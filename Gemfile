@@ -64,3 +64,5 @@ gem 'jquery-rails'
 gem 'carrierwave'
 # 做假資料
 gem 'ffaker'
+
+gem "font-awesome-rails"

@@ -4,4 +4,8 @@ class PostsController < ApplicationController
     @categories = Category.all
     @posts = Post.page(params[:page]).per(10)
   end 
+
+  def new
+    @post = Post.new
+  end
 end
