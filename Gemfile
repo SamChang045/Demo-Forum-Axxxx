@@ -58,7 +58,7 @@ gem 'devise'
 # 分頁功能
 gem 'kaminari'
 # 前端套件
-gem 'bootstrap', '~> 4.0'
+gem 'bootstrap-sass', '~> 3.3.6'
 gem 'jquery-rails'
 # 上傳檔案
 gem 'carrierwave'
