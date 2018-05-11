@@ -7,6 +7,12 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:show, :edit, :update] do
+    member do
+      get :comments
+      get :collects
+      get :drafts
+      get :friends
+    end    
   end
   
   resources :feeds, only: :index
