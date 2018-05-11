@@ -44,6 +44,21 @@
       <%= paginate @comments %>
     </div>
   </div>
+
+  <div class="row" id="comments">
+    <div class="col-sm-12 border">
+      <%= form_for [@post, @comment] do |f| %>
+        <div class="form-group">
+          <%= f.text_area :content, placeholder: "Leave a message", class: "form-control mt-4 bg-light" %>
+        </div>
+        <div class="form-group">
+          <%= f.submit class: "btn btn-primary btn-xs" %>
+          <%= f.button "Cancel", type: :reset, class: "btn btn-danger btn-xs" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
   <div class="row bg-light">
   </div>
 
