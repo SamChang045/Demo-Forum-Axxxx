@@ -1,1 +1,42 @@
 <h1>Front Desk</h1>
+<div class="container-fuild">
+  <div class="row bg-light py-4">
+    <h1 id="site-title">Wells-Forum</h1>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <nav class="nav nav-pills my-3">
+      <% if @category %>
+        <%= link_to "All", posts_path, class: "nav-link" %>
+      <% else %>
+        <%= link_to "All", posts_path, class: "nav-link active" %>
+      <% end %>
+      <% @categories.each do |category| %>
+        <% if @category && category.id == @category.id %>
+          <%= link_to category.name, posts_path(category), class: "nav-link active" %>
+        <% else %>
+          <%= link_to category.name, posts_path(category), class: "nav-link" %>
+        <% end %>
+      <% end %>
+    </nav>
+    <table class="table table-hover text-center">
+      <thead>
+        <tr>
+        </tr>
+      </thead>
+      <tbody>
+        <% @posts.each do |post| %>
+          <tr data-link="<%= post_path(post) %>">
+            <td><p class="border m-auto bg-light" style="width: 50px;"><%= post.comments_count %></p></td>
+            <th class="text-left"><%= post.title %></th>
+            <td><%= post.last_replied_at.strftime("%Y-%m-%d") if post.last_replied_at.present? %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="m-auto">
+      <%= paginate @posts %>
+    </div>
+  </div>
+</div>
