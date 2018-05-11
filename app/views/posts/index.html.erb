@@ -22,6 +22,10 @@
     <table class="table table-hover text-center">
       <thead>
         <tr>
+          <th><%= sort_link(@ransack, :comments_count, "Replied count", default_order: :desc) %></th>
+          <th class="text-left">Title</th>
+          <th><%= sort_link(@ransack, "Last replied at", default_order: :desc) %></th>
+          <th><%= sort_link(@ransack, "Viewed count", default_order: :desc) %></th>
         </tr>
       </thead>
       <tbody>
@@ -29,6 +33,9 @@
           <tr data-link="<%= post_path(post) %>">
             <td><p class="border m-auto bg-light" style="width: 50px;"><%= post.comments_count %></p></td>
             <th class="text-left"><%= post.title %></th>
+            <td></td>
+            <td>
+            </td>
           </tr>
         <% end %>
       </tbody>

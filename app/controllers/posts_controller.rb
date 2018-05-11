@@ -4,8 +4,14 @@ class PostsController < ApplicationController
 
   def index
     @categories = Category.all
-    @posts = Post.page(params[:page]).per(10)
-  end 
+    if params[:category_id]
+      @category = Category.find(params[:category_id])
+      @ransack = @category.posts.ransack(params[:q])
+    else
+      @ransack = Post.ransack(params[:q])
+    end
+    @posts = @ransack.result(distinct: true).page(params[:page]).per(20)
+  end
 
   def new
     @post = Post.new
