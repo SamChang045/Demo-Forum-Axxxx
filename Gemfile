@@ -64,5 +64,7 @@ gem 'jquery-rails'
 gem 'carrierwave'
 # 做假資料
 gem 'ffaker'
+# 首頁排序搜尋用
+gem 'ransack'
 
 gem "font-awesome-rails"
