@@ -37,6 +37,14 @@
     </div>
   </div>
   <div class="row bg-light">
+    <% @comments.each do |comment| %>
+
+    <% end %>
+    <div class="mx-auto mt-3">
+      <%= paginate @comments %>
+    </div>
+  </div>
+  <div class="row bg-light">
   </div>
 
   <div class="row" id="comments">
