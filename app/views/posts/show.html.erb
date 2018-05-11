@@ -10,11 +10,30 @@
   </div>
   <div class="row">
     <div class="col-sm-3 border">
+      <div class="user-item text-center mt-3 mb-3">
+        <%= link_to user_path(@post.user_id), class: "nav-link" do %>
+          <div class="avatar">
+            <% if @post.user.avatar? %>
+              <%= image_tag @post.user.avatar, width: "100%" %>
+            <% else %>
+              <%= fa_icon "user 5x" %>
+            <% end %>
+          </div>
+          <p><strong><%= @post.user.name %></strong></p>
+        <% end %>
+      </div>
     </div>
     <div class="col-sm-9 border">
       <div class="image mt-3">
         <%= image_tag @post.image, width: "500px" if @post.image? %>
       </div>
+      <div class="content-item w-100">
+        <p><%= @post.content %></p>
+        <div class="row">
+          <div class="col-sm-2 offset-sm-10">
+          </div>
+        </div>
+      </div>      
     </div>
   </div>
   <div class="row bg-light">
