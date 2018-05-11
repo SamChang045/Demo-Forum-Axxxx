@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>SimpleForum</title>
+    <title>WellsForum</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,16 +9,60 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-
-    <% if current_user %>
-      Hi, <%= current_user.email %>
-      <%= link_to('登出', destroy_user_session_path, method: :delete) %> |
-      <%= link_to('修改密碼', edit_user_registration_path) %>
-    <% else %>
-      <%= link_to('註冊', new_user_registration_path) %> |
-      <%= link_to('登入', new_user_session_path) %>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <%= link_to "Forum", root_path, class: "navbar-brand" %>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <% if current_user %>
+            <% if current_user.admin? %>
+              <li class="nav-item">
+                <%= link_to "Admin" , admin_root_path, class: "nav-link" %>
+              </li>
+            <% end %>
+            <li class="nav-item">
+              <a class="nav-link" href="">
+                <%= current_user.email %>
+                (<%= current_user.role.capitalize %>)
+              </a>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <a class="nav-link" href="">Hi, Guest</a>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Sign up", new_user_registration_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Log in", new_user_session_path, class: "nav-link" %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
+    <% if notice %>
+      <div class="container-fluid">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <strong>Notice!</strong>
+          <%= notice %>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+    <% end %>
+    <% if alert %>
+      <div class="container-fluid">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong>Alert!</strong>
+          <%= alert %>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
     <% end %>
     <%= yield %>
   </body>
