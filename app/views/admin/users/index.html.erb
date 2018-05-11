@@ -13,8 +13,7 @@
       <tbody>
         <% @users.each do |user| %>
           <tr>
-            <td data-link="<%= user_path(user) %>"><%= user.name %></td>
-            <td data-link="<%= user_path(user) %>"><%= user.email %></td>
+
             <td>
               <%= form_tag admin_user_path(user), method: :patch, class: "form-inline" do %>
                 <%= submit_tag "Update", class: "btn btn-primary" %>
