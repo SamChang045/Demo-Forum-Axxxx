@@ -67,7 +67,20 @@
       </div>
       <div class="col-sm-9 border">
         <div class="content-item w-100">
-          <p><%= comment.content %></p>
+
+          <% if comment.content.length > 30 %>
+            <%= truncate(comment.content, length: 30) %>
+            <%= link_to '...Read more', '', class: "read-more-#{comment.id}" %>
+            <script>
+              $('.read-more-<%= comment.id %>').on('click', function(e) {
+                e.preventDefault()
+                $(this).parent().html('<%= escape_javascript comment.content %>')
+              })
+            </script>
+          <% else %>
+            <%= comment.content %>
+          <% end %>
+
           <div class="row">
             <div class="col-sm-2 offset-sm-10">
               <% if comment.user == current_user || current_user.admin? %>
