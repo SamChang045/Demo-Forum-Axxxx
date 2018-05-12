@@ -50,14 +50,16 @@
 </div>
 <div class ="container">
   <div clasee ="row">
-    <table class="table table-hover text-center bg-light">
-      <tbody>
+    <table class="table table-hover">
+      <thead class="thead-light">
         <tr>
-          <td>Title</td>
-          <td>Status</td>
-          <td>Time</td>
-          <td>#</td>          
+          <th>Title</th>
+          <th>Status</th>
+          <th>Time</th>
+          <th>#</th>  
         </tr>
+      </thead>
+      <tbody>
         <% @posts.each do |post| %>
           <tr>
             <td data-link="<%= post_path(post) %>"><%= post.title %></td>

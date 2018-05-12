@@ -50,14 +50,15 @@
 </div>
 <div class="container">
   <div class="row">
-    <table class="table table-hover text-center bg-light">
-      <tbody>
+    <table class="table table-hover">
+      <thead class="thead-light">
         <tr>
-          <td>Title</td>
-          <td>Status</td>
-          <td>Time</td>
-          <td>#</td>          
-        </tr>      
+          <th>Title</th>
+          <th>Status</th>
+          <th>Time</th>
+          <th>#</th>  
+        </tr>
+      </thead>    
         <% @drafts.each do |post| %>
           <tr>
             <td><%= post.title %></td>
