@@ -55,7 +55,22 @@
         Waiting for reply
       </h5>
       <div class="row" id="wait-friend">
-
+        <% @not_yet_accepted_by_friends.each do |user| %>
+          <div class="col-sm-2" id="user-<%= user.id %>">
+            <div class="user-item text-center mt-3 mb-3">
+              <%= link_to user_path(user), class: "nav-link" do %>
+                <div class="avatar">
+                  <% if user.avatar? %>
+                    <%= image_tag user.avatar, width: "100%" %>
+                  <% else %>
+                    <%= fa_icon "user 5x" %>
+                  <% end %>
+                </div>
+                <p><strong><%= user.name %></strong></p>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
     <div class="container border bg-light">
@@ -63,7 +78,22 @@
         Friends invitation      
       </h5>
       <div class="row" id="unaccept-friend">
-
+        <% @not_yet_responded_to_friends.each do |user| %>
+          <div class="col-sm-2" id="user-<%= user.id %>">
+            <div class="user-item text-center mt-3 mb-3">
+              <%= link_to user_path(user), class: "nav-link" do %>
+                <div class="avatar">
+                  <% if user.avatar? %>
+                    <%= image_tag user.avatar, width: "100%" %>
+                  <% else %>
+                    <%= fa_icon "user 5x" %>
+                  <% end %>
+                </div>
+                <p><strong><%= user.name %></strong></p>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
     <div class="container border bg-light">
@@ -71,7 +101,25 @@
         Friends List
       </h5>
       <div class="row" id="friend">
-
+        <% @friends.each do |user| %>
+          <div class="col-sm-2" id="user-<%= user.id %>">
+            <div class="user-item text-center mt-3 mb-3">
+              <%= link_to user_path(user), class: "nav-link" do %>
+                <div class="avatar">
+                  <% if user.avatar? %>
+                    <%= image_tag user.avatar, width: "100%" %>
+                  <% else %>
+                    <%= fa_icon "user 5x" %>
+                  <% end %>
+                </div>
+                <p><strong><%= user.name %></strong></p>
+              <% end %>
+            </div>
+          </div>
+          <% if current_user.friend?(user)%>
+            <%= link_to 'No more friend', friendships_path(user), method: :delete %>
+          <% end %>
+        <% end %>
       </div>
     </div>
   </div>
