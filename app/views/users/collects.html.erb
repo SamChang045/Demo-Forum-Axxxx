@@ -1,0 +1,70 @@
+<div class="container bg-light">
+  <div class="row pt-3">
+    <div class="col-sm-12">
+        <div class="row">
+        <div class="col-sm-3 mt-3">
+          <%= link_to user_path(@user), class: "nav-link" do %>
+            <% if @user.avatar? %>
+              <%= image_tag @user.avatar, width: "100%" %>
+            <% else %>
+              <%= fa_icon "user 5x" %>
+            <% end %>
+            <p class="text-center"><strong><%= @user.name %></strong></p>
+          <% end %>
+        </div>
+        <div class="col-sm-9">
+          <p><%= @user.description %></p>
+          <% if @user == current_user %>
+            <div class="d-flex flex-row-reverse">
+              <%= link_to "Edit", edit_user_path(@user), class: "btn btn-primary" %>
+            </div>
+          <% else %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <ul class="nav nav-tabs">
+      <li role="presentation" class="<%= "active" if current_page?(user_path(@user)) %>">
+        <%= link_to 'Post', user_path(@user) %>
+      </li>
+      <li role="presentation" class="<%= "active" if current_page?(comments_user_path(@user)) %>">
+        <%= link_to 'Comment', comments_user_path %>
+      </li>
+      <li role="presentation" class="<%= "active" if current_page?(collects_user_path(@user)) %>">
+        <%= link_to 'Collect', collects_user_path%>
+      </li>
+      <% if @user == current_user %>
+        <li role="presentation" class="<%= "active" if current_page?(drafts_user_path(@user)) %>">
+          <%= link_to 'Draft', drafts_user_path %>
+        </li>
+      <% end %>
+      <li role="presentation" class="<%= "active" if current_page?(friends_user_path(@user)) %>">
+        <%= link_to 'Friend', friends_user_path %>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <table class="table table-hover text-center bg-light">
+      <tbody>
+        <% @collections.each do |post| %>
+          <tr>
+            <td data-link="<%= post_path(post) %>"><%= post.title %></td>
+            <td>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<script>
+  $("td[data-link]").click(function() {
+    window.location.href = $(this).attr("data-link")
+  })
+</script>
