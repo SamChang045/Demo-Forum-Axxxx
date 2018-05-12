@@ -30,7 +30,20 @@
         <%= image_tag @post.image, width: "500px" if @post.image? %>
       </div>
       <div class="content-item w-100">
-        <p><%= @post.content %></p>
+
+        <% if @post.content.length > 50 %>
+          <%= truncate(@post.content, length: 30) %>
+          <%= link_to '...Read more', '', class: "read-more-#{comment.id}" %>
+          <script>
+            $('.read-more-<%= comment.id %>').on('click', function(e) {
+              e.preventDefault()
+              $(this).parent().html('<%= escape_javascript simple_format(@post.content) %>')
+            })
+          </script>
+        <% else %>
+          <%= simple_format(@post.content) %>
+        <% end %>
+
         <div class="row">
           <div class="col-sm-2 offset-sm-10">
             <% if @post.user == current_user || current_user.admin? %>
@@ -67,20 +80,7 @@
       </div>
       <div class="col-sm-9 border">
         <div class="content-item w-100">
-
-          <% if comment.content.length > 30 %>
-            <%= truncate(comment.content, length: 30) %>
-            <%= link_to '...Read more', '', class: "read-more-#{comment.id}" %>
-            <script>
-              $('.read-more-<%= comment.id %>').on('click', function(e) {
-                e.preventDefault()
-                $(this).parent().html('<%= escape_javascript comment.content %>')
-              })
-            </script>
-          <% else %>
-            <%= comment.content %>
-          <% end %>
-
+          <%= simple_format(comment.content) %>
           <div class="row">
             <div class="col-sm-2 offset-sm-10">
               <% if comment.user == current_user || current_user.admin? %>
