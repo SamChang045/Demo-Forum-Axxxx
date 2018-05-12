@@ -21,6 +21,17 @@
             <span class="icon-bar"></span>
           </button>
           <%= link_to "Simple Forum", root_path, class: "navbar-brand" %>
+
+          <div class="bar-item">
+            <%= link_to "Feeds", feeds_path, class: "nav-link" %>
+          </div>
+          <div class="bar-item">
+            <%= link_to "All Post", posts_path, class: "nav-link" %>
+          </div>
+          <div class="bar-item">
+            <%= link_to "New Post", new_post_path, class: "nav-link" %>
+          </div>
+          
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse">
