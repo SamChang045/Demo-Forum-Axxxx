@@ -64,6 +64,18 @@
             <td><%= post.title %></td>
             <td>Draft</td>
             <td><%= post.updated_at.strftime("%Y-%m-%d") %></td>
+            <td>
+              <% if post.user == current_user || current_user.admin? %>
+                <div class="buttons">
+                  <%= link_to edit_post_path(post), class: "p-2" do %>
+                    <i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i>
+                  <% end %>
+                  <%= link_to post_path(post), method: :delete, data: { confirm: "確定刪除？" }, class: "p-2 text-danger" do %>
+                    <i class="fa fa-trash-o fa-2x" aria-hidden="true"></i>
+                  <% end %>
+                </div>
+              <% end %>     
+            </td>       
           </tr>
         <% end %>
       </tbody>
