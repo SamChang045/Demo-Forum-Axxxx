@@ -22,6 +22,13 @@
             <% end %>
           </div>
           <p><strong><%= @post.user.name %></strong></p>
+          <div class="links" id="user-<%= user.id %>">
+            <% if user !=  current_user %>
+              <% unless current_user.friend?(@post.user) %>
+
+              <% end %>
+            <% end %>
+          </div>          
         <% end %>
       </div>
     </div>
