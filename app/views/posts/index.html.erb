@@ -31,7 +31,10 @@
           <tr data-link="<%= post_path(post) %>">
             <td><p class="border m-auto bg-light" style="width: 50px;"><%= post.comments_count %></p></td>
             <th class="text-left"><%= post.title %></th>
-            <td class="text-left"><%= post.viewed_count  %></td>
+            <td class="text-left"><%= post.last_replied_at.strftime("%Y-%m-%d") if post.last_replied_at.present? %></td>
+            <td class="text-left">
+              <%= fa_icon "eye", text: post.viewed_count  %>
+            </td>
           </tr>
         <% end %>
       </tbody>
