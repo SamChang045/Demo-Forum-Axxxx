@@ -60,6 +60,9 @@
           <div class="col-sm-2">
             <% if comment.user == current_user || current_user.admin? %>
               <div class="buttons">
+                <%= link_to post_comment_path(comment.post,comment), method: :delete, data: { confirm: "Are you sure to delete?" }, class: "p-2 text-danger" do %>
+                  <i class="fa fa-trash-o fa-2x" aria-hidden="true"></i>
+                <% end %>
               </div>
             <% end %>
           </div>
@@ -68,3 +71,9 @@
     <% end %>
   </div>
 </div>
+
+<script>
+  $("div[data-link]").click(function() {
+    window.location.href = $(this).attr("data-link")
+  })
+</script>
