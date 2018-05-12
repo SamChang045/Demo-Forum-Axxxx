@@ -31,9 +31,7 @@
           <tr data-link="<%= post_path(post) %>">
             <td><p class="border m-auto bg-light" style="width: 50px;"><%= post.comments_count %></p></td>
             <th class="text-left"><%= post.title %></th>
-            <td></td>
-            <td>
-            </td>
+            <td class="text-left"><%= post.viewed_count  %></td>
           </tr>
         <% end %>
       </tbody>
@@ -43,3 +41,9 @@
     </div>
   </div>
 </div>
+
+<script>
+  $("tr[data-link]").click(function() {
+    window.location.href = $(this).attr("data-link")
+  })
+</script>
