@@ -19,13 +19,15 @@ class User < ApplicationRecord
 
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships
-
-  ROLE = {
-    normal: "User",
-    admin: "Admin"
-  }
+  has_many :inverse_friendships, class_name: "Friendship", foreign_key: "friend_id"
+  has_many :inverse_friends, through: :inverse_friendships, source: :user
 
   def admin?
     self.role == "admin"
+  end
+
+  def all_friends
+    friends = self.friends + self.inverse_friends
+    return friends
   end
 end
