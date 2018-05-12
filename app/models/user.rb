@@ -26,6 +26,10 @@ class User < ApplicationRecord
     self.role == "admin"
   end
 
+  def friend?(user)
+    self.friendships.include?(user)
+  end
+
   def all_friends
     friends = self.friends + self.inverse_friends
     return friends
