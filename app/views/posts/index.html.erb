@@ -6,18 +6,16 @@
 <div class="container">
   <div class="row">
     <nav class="nav nav-pills my-3">
-      <% if @category %>
-        <%= link_to "All", posts_path, class: "nav-link" %>
-      <% else %>
-        <%= link_to "All", posts_path, class: "nav-link active" %>
-      <% end %>
-      <% @categories.each do |category| %>
-        <% if @category && category.id == @category.id %>
-          <%= link_to category.name, posts_path(category_id: category.id), class: "nav-link active" %>
-        <% else %>
-          <%= link_to category.name, posts_path(category_id: category.id), class: "nav-link" %>
+      <ul class="nav nav-tabs">
+        <li role="presentation" class="<%= "active" if !@category  %>">
+          <%= link_to 'All', posts_path %>
+        </li>
+        <% @categories.each do |category| %>
+          <li role="presentation" class="<%= "active" if @category && category.id == @category.id %>">
+            <%= link_to category.name, posts_path(category_id: category.id), class: "nav-link active" %>
+          </li>
         <% end %>
-      <% end %>
+      </ul>
     </nav>
     <table class="table table-hover text-center">
       <thead>
