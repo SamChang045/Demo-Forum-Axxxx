@@ -1,9 +1,9 @@
-.navbar-nav {
-    display: flex;
-    flex-direction: column;
-    padding-left: 0;
-    margin-bottom: 0;
-    list-style: none;
+textarea#post_content, textarea#comment_content, textarea#user_description {
+  height: 20em;
+}
+
+div#unaccept-friend, div#friend, div#wait-friend {
+  min-height: 180px;
 }
 
 #site-title {
