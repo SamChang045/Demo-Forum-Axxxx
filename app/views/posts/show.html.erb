@@ -22,10 +22,16 @@
             <% end %>
           </div>
           <p><strong><%= @post.user.name %></strong></p>
-          <div class="links" id="user-<%= user.id %>">
-            <% if user !=  current_user %>
+          <div class="links" id="user-<%= @post.user.id %>">
+            <% if @post.user !=  current_user %>
               <% unless current_user.friend?(@post.user) %>
-
+                <% if current_user.not_yet_responded_to?(@post.user) %>
+                  <%= link_to "Accept", accept_friendship_path(@post.user), class: "btn btn-primary", method: :post, remote: true %><br>
+                  <%= link_to "Ignore", ignore_friendship_path(@post.user), class: "btn btn-danger", method: :delete, remote: true %>
+                <% elsif current_user.not_yet_accepted_by?(@post.user) %>
+                <% else %>
+                  <%= link_to "Add Friend", friendships_path(friend_id: @post.user), class: "btn btn-primary", method: :post, remote: true %>
+                <% end %>
               <% end %>
             <% end %>
           </div>          
