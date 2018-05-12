@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <% @comments.each do |comment| %>
+      <div class="col-sm-12 border-top border-buttom bg-light">
+        <div class="row align-items-center">
+          <div class="col-sm-8 offset-sm-2" data-link="<%= post_path(comment.post) %>">
+            <h4 class="m-3"><%= comment.post.title %></h4>
+            <p class="border p-4 rounded bg-secondary text-white"><%= comment.content %></p>
+          </div>
+          <div class="col-sm-2">
+            <% if comment.user == current_user || current_user.admin? %>
+              <div class="buttons">
+                <%= link_to edit_current_comment_post_path(post, comment_id: comment.id), remote: true, class: "p-2" do %>
+                  <%= fa_icon "edit 2x" %>
+                <% end %>
+                <%= link_to post_comment_path(post,comment), method: :delete, data: { confirm: "確定刪除？" }, class: "p-2 text-danger" do %>
+                  <%= fa_icon "window-close-o 2x" %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
