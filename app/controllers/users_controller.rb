@@ -8,6 +8,18 @@ class UsersController < ApplicationController
     @comments = @user.comments
   end
 
+  def collects
+    @collections = @user.collect_posts
+  end
+
+  def drafts
+    @drafts = @user.posts
+  end
+
+  def friends
+    @friends = @user.all_friends
+  end
+
   private
 
   def set_user
