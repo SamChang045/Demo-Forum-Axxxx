@@ -4,6 +4,11 @@ class UsersController < ApplicationController
     @posts = @user.posts
   end
 
+  def update
+    @user.update(user_params)
+    redirect_to user_path(@user)
+  end
+
   def comments
     @comments = @user.comments
   end
@@ -24,5 +29,9 @@ class UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def user_params
+    params.require(:user).permit(:name, :description, :avatar)
   end
 end
