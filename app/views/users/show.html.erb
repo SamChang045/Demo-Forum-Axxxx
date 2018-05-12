@@ -25,6 +25,29 @@
     </div>
   </div>
 </div>
+<div class="container">
+  <div class="row">
+    <ul class="nav nav-tabs">
+      <li role="presentation" class="<%= "active" if current_page?(user_path(@user)) %>">
+        <%= link_to 'Post', user_path(@user) %>
+      </li>
+      <li role="presentation" class="<%= "active" if current_page?(comments_user_path(@user)) %>">
+        <%= link_to 'Comment', comments_user_path %>
+      </li>
+      <li role="presentation" class="<%= "active" if current_page?(collects_user_path(@user)) %>">
+        <%= link_to 'Collect', collects_user_path%>
+      </li>
+      <% if @user == current_user %>
+        <li role="presentation" class="<%= "active" if current_page?(drafts_user_path(@user)) %>">
+          <%= link_to 'Draft', drafts_user_path %>
+        </li>
+      <% end %>
+      <li role="presentation" class="<%= "active" if current_page?(friends_user_path(@user)) %>">
+        <%= link_to 'Friend', friends_user_path %>
+      </li>
+    </ul>
+  </div>
+</div>
 <div class ="container">
   <div clasee ="row">
     <table class="table table-hover text-center bg-light">
