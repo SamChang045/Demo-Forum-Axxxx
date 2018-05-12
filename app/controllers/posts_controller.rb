@@ -22,6 +22,7 @@ class PostsController < ApplicationController
     if params[:commit] == "Save Draft"
       @post.public = false
       if @post.save
+        redirect_to drafts_user_path(current_user)
       else
         flash.now[:alert] = @post.errors.full_messages.to_sentence
         render :new
