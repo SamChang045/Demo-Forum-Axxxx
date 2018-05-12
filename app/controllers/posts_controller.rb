@@ -59,6 +59,18 @@ class PostsController < ApplicationController
     end
   end
 
+  def destroy
+    if @post.public
+      @post.destroy
+      flash[:notice] = "Article was deleted!"
+      redirect_to user_path(current_user)
+    else
+      @post.destroy
+      flash[:notice] = "Draft was deleted!"
+      redirect_to drafts_user_path(current_user)
+    end
+  end  
+
   def show
     @comments = @post.comments.page(params[:page]).per(20)
     @comment = Comment.new
