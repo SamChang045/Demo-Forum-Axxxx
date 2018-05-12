@@ -25,11 +25,4 @@ class FriendshipsController < ApplicationController
       format.js
     end
   end
-
-  def destroy
-    @friendship = current_user.friendships.where(following_id: params[:id]).first
-    @followship.destroy_all
-    flash[:alert] = "Friendship destroyed"
-    redirect_to friends_user_path(current_user)
-  end
 end

@@ -34,7 +34,7 @@ class User < ApplicationRecord
   end
 
   def friend?(user)
-    self.friendships.include?(user)
+    self.friends.include?(user) || self.inverse_friends.include?(user)
   end
 
   def not_yet_accepted_by?(user)
@@ -47,6 +47,6 @@ class User < ApplicationRecord
 
   def all_friends
     friends = self.friends + self.inverse_friends
-    return friends
+    return friends.uniq
   end
 end
