@@ -34,7 +34,7 @@ class Api::V1::PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
     if @post.save
       render json: {
-        message: "Post successfully.",
+        message: "Post posted successfully.",
         result: @post
       }
     else
@@ -42,6 +42,26 @@ class Api::V1::PostsController < ApplicationController
         errors: @post.errors
       }
     end
+  end
+
+  def update
+    if @post.update(post_params)
+      render json: {
+        message: "Post updated successfully.",
+        result: @post
+      }
+    else
+      render json: {
+        errors: @post.errors
+      }
+    end
+  end
+
+  def destroy
+    @post.destroy
+    render json: {
+      message: "Post deleted successfully"
+    }
   end
 
   private
