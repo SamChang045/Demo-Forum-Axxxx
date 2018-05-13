@@ -25,6 +25,7 @@ class User < ApplicationRecord
 
   has_many :not_yet_accepted_by_friendships, -> {where status: false}, class_name: "Friendship", dependent: :destroy
   has_many :not_yet_accepted_by_friends, through: :not_yet_accepted_by_friendships, source: :friend
+  
   has_many :not_yet_responded_to_friendships, -> {where status: false}, class_name: "Friendship", foreign_key: "friend_id", dependent: :destroy
   has_many :not_yet_responded_to_friends, through: :not_yet_responded_to_friendships, source: :user
 

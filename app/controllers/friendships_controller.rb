@@ -25,4 +25,11 @@ class FriendshipsController < ApplicationController
       format.js
     end
   end
+
+  def destroy
+    @friendship = current_user.not_yet_responded_to_friendships.find_by(user_id: params[:id])
+    @friendship.destroy
+    flash[:notice] = "Friend? No more."
+    redirect_to friendship_user_path(current_user)
+  end
 end
