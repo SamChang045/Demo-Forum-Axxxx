@@ -55,17 +55,25 @@
 <div class="container">
   <div class="row">
     <div class="container border bg-light">
+      <div class="container border bg-light">
+        <h5 class="text-center">
+          Waiting for response
+        </h5>
+        <div class="row" id="wait-friend">
+          <% @not_yet_accepted_by_friends.each do |user| %>
+            <div class="col-sm-2" id="user-<%= user.id %>">
+              <%= render partial: "shared/user_item", locals: { user: user } %>
+            </div>
+          <% end %>
+        </div>
+      </div>
       <h5 class="text-center">
         Friends invitation      
       </h5>
       <div class="row" id="unaccept-friend">
         <% @not_yet_responded_to_friends.each do |user| %>
-          <div class="row" id="unaccept-friend">
-            <% @not_yet_responded_to_friends.each do |user| %>
-              <div class="col-sm-2" id="user-<%= user.id %>">
-                <%= render partial: "shared/user_item", locals: { user: user } %>
-              </div>
-            <% end %>
+          <div class="col-sm-2" id="user-<%= user.id %>">
+            <%= render partial: "shared/user_item", locals: { user: user } %>
           </div>
         <% end %>
       </div>
