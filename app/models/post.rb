@@ -11,6 +11,8 @@ class Post < ApplicationRecord
   has_many :vieweds, dependent: :destroy
   has_many :viewed_users, through: :vieweds, source: :user
 
+  mount_uploader :image, PhotoUploader
+  
   def collected_by?(user)
     self.collect_users.include?(user)
   end
