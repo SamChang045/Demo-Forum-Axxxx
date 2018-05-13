@@ -13,6 +13,15 @@ class CommentsController < ApplicationController
     end
   end
 
+  def update
+    if @comment.update(comment_params)
+      redirect_to post_path(@post)
+    else
+      flash[:alert] = @comment.errors.full_messages.to_sentence
+      redirect_to post_path(@post)
+    end
+  end  
+
   def destroy
     @comment.destroy
     redirect_to comments_user_path(current_user)
