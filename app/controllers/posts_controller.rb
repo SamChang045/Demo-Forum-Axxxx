@@ -4,13 +4,22 @@ class PostsController < ApplicationController
 
   def index
     @categories = Category.all
-    if params[:category_id]
-      @category = Category.find(params[:category_id])
-      @ransack = @category.posts.ransack(params[:q])
+    if current_user
+      if params[:category_id]
+        @category = Category.find(params[:category_id])
+        @ransack = @category.posts.readable_posts(current_user).ransack(params[:q])
+      else
+        @ransack = Post.readable_posts(current_user).ransack(params[:q])
+      end
     else
-      @ransack = Post.ransack(params[:q])
+      if params[:category_id]
+        @category = Category.find(params[:category_id])
+        @ransack = @category.posts.where(authority: "all").ransack(params[:q])
+      else
+        @ransack = Post.where(authority: "all").ransack(params[:q])
+      end
     end
-    @posts = @ransack.result(distinct: true).page(params[:page]).per(20)
+      @posts = @ransack.result(distinct: true).includes(:comments).page(params[:page]).per(20)
   end
 
   def new
@@ -73,8 +82,14 @@ class PostsController < ApplicationController
   end  
 
   def show
-    @comments = @post.comments.page(params[:page]).per(10)
-    @comment = Comment.new
+    if @post.check_authority_for?(current_user)
+      @post.vieweds.create(user: current_user) unless @post.viewed_by?(current_user)
+      @comments = @post.comments.includes(:user).page(params[:page]).per(20)
+      @comment = Comment.new
+    else
+      flash[:alert] = "Has no authority."
+      redirect_to posts_path
+    end
   end
 
   def collect
