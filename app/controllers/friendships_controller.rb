@@ -32,6 +32,7 @@ class FriendshipsController < ApplicationController
     end
   end
 
+  #加我與我加的, 就是朋友
   def destroy
     if @friendship = current_user.friendships.find_by(friend_id: params[:id])
       @friendship.destroy

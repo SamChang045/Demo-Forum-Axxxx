@@ -17,9 +17,11 @@ class User < ApplicationRecord
   has_many :collections, dependent: :destroy
   has_many :collect_posts, through: :collections, source: :post
 
+  #我加的但對方還沒接受
   has_many :friendships, -> {where status: true}, dependent: :destroy
   has_many :friends, through: :friendships
 
+  #加我但我還沒回應
   has_many :inverse_friendships, -> {where status: true}, class_name: "Friendship", foreign_key: "friend_id"
   has_many :inverse_friends, through: :inverse_friendships, source: :user
 
