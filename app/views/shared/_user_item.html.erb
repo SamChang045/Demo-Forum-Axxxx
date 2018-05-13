@@ -23,7 +23,9 @@
         <% elsif current_user.not_yet_accepted_by?(user) %>
         <% else %>
           <%= link_to "Add friend", friendships_path(friend_id: user), class: "btn btn-primary", method: :post, remote: true %>    
-        <% end %>      
+        <% end %>
+      <% else %>
+          <%= link_to "Decline", friendship_path(user), class: "btn btn-primary", method: :delete, remote: true %>                   
       <% end %>
     <% end %>
   </div>
