@@ -54,28 +54,46 @@
 </div>
 <div class="container">
   <div class="row">
-    <% @comments.each do |comment| %>
-      <div class="col-sm-12 border-top border-buttom bg-light">
-        <div class="row align-items-center">
-          <div class="col-sm-8 offset-sm-2" data-link="<%= post_path(comment.post) %>">
-            <h4 class="m-3"><%= comment.post.title %></h4>
-            <p class="border p-4 rounded bg-secondary text-white"><%= comment.content %></p>
-          </div>
-          <div class="col-sm-2">
-            <% if comment.user == current_user || current_user.admin? %>
-              <div class="buttons">    
-                <%= link_to edit_current_comment_post_path(comment.post, comment_id: comment.id), remote: true, class: "p-2" do %>
-                  <i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i>
-                <% end %>
-                <%= link_to post_comment_path(comment.post,comment), method: :delete, data: { confirm: "Are you sure to delete?" }, class: "p-2 text-danger" do %>
-                  <i class="fa fa-trash-o fa-2x" aria-hidden="true"></i>
-                <% end %>
+    <table class="table table-hover">
+      <thead class="thead-light">
+        <tr>
+          <th>Title</th>
+          <th>#</th>  
+        </tr>  
+      </thead>
+      <tbody>
+        <% @comments.each do |comment| %>
+          <tr>
+            <div class="col-sm-12 border-top border-buttom">
+              <td>
+                <div class="row align-items-center">
+                  <div class="col-sm-8 offset-sm-2" data-link="<%= post_path(comment.post) %>">
+                    <h4 class="m-3"><%= comment.post.title %></h4>
+                    <p class="border p-4 rounded">
+                      <%= comment.content %>
+                    </p>
+                  </div>
+                </div>
+              </td>
+              <div class="col-sm-2">
+                <td>
+                  <% if comment.user == current_user || current_user.admin? %>
+                    <div class="buttons">    
+                      <%= link_to edit_current_comment_post_path(comment.post, comment_id: comment.id), remote: true, class: "p-2" do %>
+                        <i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i>
+                      <% end %>
+                      <%= link_to post_comment_path(comment.post,comment), method: :delete, data: { confirm: "Are you sure to delete?" }, class: "p-2 text-danger" do %>
+                        <i class="fa fa-trash-o fa-2x" aria-hidden="true"></i>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </td>
               </div>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    <% end %>
+            </div>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>        
   </div>
 </div>
 

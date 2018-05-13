@@ -54,7 +54,13 @@
 </div>
 <div class="container">
   <div class="row">
-    <table class="table table-hover text-center bg-light">
+    <table class="table table-hover">
+      <thead class="thead-light">
+        <tr>
+          <th>Title</th>
+          <th>#</th>  
+        </tr>
+      </thead>
       <tbody>
         <% @collections.each do |post| %>
           <tr>
