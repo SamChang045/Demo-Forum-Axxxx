@@ -6,6 +6,11 @@
       </h3>
     </div>
     <div class="col-sm-3 offset-sm-6">
+      <% if @post.collected_by?(current_user) %>
+        <%= link_to "Uncollect", uncollect_post_path(@post), remote: true, method: :post, class: "btn btn-sm btn-primary", id: "uncollect-#{@post.id}" %>
+      <% else %>
+        <%= link_to "Collect", collect_post_path(@post), remote: true, method: :post, class: "btn btn-sm btn-primary", id: "collect-#{@post.id}" %>
+      <% end %>
       <%= link_to "Comment", "#comments" ,class: "btn btn-sm btn-primary" %>
     </div>
   </div>
