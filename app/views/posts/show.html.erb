@@ -55,9 +55,9 @@
 
         <% if @post.content.length > 50 %>
           <%= truncate(@post.content, length: 30) %>
-          <%= link_to '...Read more', '', class: "read-more-#{comment.id}" %>
+          <%= link_to '...Read more', '', class: "read-more-#{@post.id}" %>
           <script>
-            $('.read-more-<%= comment.id %>').on('click', function(e) {
+            $('.read-more-<%= @post.id %>').on('click', function(e) {
               e.preventDefault()
               $(this).parent().html('<%= escape_javascript simple_format(@post.content) %>')
             })

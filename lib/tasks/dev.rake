@@ -1,0 +1,81 @@
+namespace :dev do
+  task fake_post: :environment do
+    Post.destroy_all
+
+    rand(100..300).times do
+      user = User.all.sample
+      post = user.posts.build(
+        title: FFaker::Book.unique.author,
+        content: FFaker::Book.description,
+        image: File.open(Rails.root.join("public/fake_image/#{rand(1..16)}.jpeg")),
+        public: [true, true, true, false].sample,
+        authority: ["myself", "friend", "all"].sample,
+        category: Category.all.sample
+      )
+      post.save
+    end
+    puts "have created fake posts"
+    puts "now you have #{Post.count} posts data"
+  end
+
+  task fake_user: :environment do
+    User.destroy_all
+    20.times do
+      username = FFaker::Name.unique.last_name
+      User.create!(
+        name: username,
+        email: "#{username}@example.com",
+        password: "12345678",
+        avatar: File.open(Rails.root.join("public/fake_avatar/#{rand(1..18)}.jpeg")),
+        description: FFaker::Lorem.paragraphs
+      )
+    end
+    puts "created fake users"
+    puts "now you have #{User.count} users data"
+  end
+
+  task fake_comment: :environment do
+    Comment.destroy_all
+    200.times do
+      user = User.all.sample
+      post = Post.readable_posts(user).sample
+      post.comments.create!(
+        user: user,
+        content: FFaker::Lorem.sentence
+      )
+      unless post.viewed_by?(user)
+        post.vieweds.create( user: user )
+      end
+    end
+    puts "created fake comments"
+    puts "now you have #{Comment.count} comments data"
+  end
+
+  task fake_collect: :environment do
+    100.times do
+      user = User.all.sample
+      post = Post.readable_posts(user).sample
+      unless post.collect_by?(user)
+        post.collections.create(user: user)
+      end
+    end
+    puts "created fake collections"
+    puts "now you have #{Collection.count} collections data"
+  end
+
+  task fake_friend: :environment do
+    60.times do
+      user1 = User.all.sample
+      user2 = User.where.not(id: user1.id).sample
+      unless user1.not_yet_accepted_by?(user2) || user1.not_yet_responded_to?(user2)
+        user1.not_yet_accepted_by_friendships.create!(friend: user2)
+        puts "#{user1.name} invite #{user2.name}"
+      end
+    end
+    30.times do
+      friendship = Friendship.where(status: false).sample
+      friendship.update(status: true)
+      puts "#{friendship.user_id} accept friend to #{friendship.friend_id}"
+    end
+  end
+end
