@@ -19,7 +19,7 @@ namespace :dev do
   end
 
   task fake_user: :environment do
-    User.destroy_all
+    User.where.not(role: "admin").destroy_all
     20.times do
       username = FFaker::Name.unique.last_name
       User.create!(

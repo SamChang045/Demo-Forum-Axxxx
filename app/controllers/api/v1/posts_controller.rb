@@ -49,5 +49,4 @@ class Api::V1::PostsController < ApplicationController
   def post_params
     params.permit(:title, :content, :image, :public, :authority, :category_id)
   end
-
 end
