@@ -25,4 +25,7 @@ class FriendshipsController < ApplicationController
       format.js
     end
   end
+
+  def destroy
+  end  
 end

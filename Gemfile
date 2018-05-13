@@ -68,3 +68,5 @@ gem 'ffaker'
 gem 'ransack'
 
 gem "font-awesome-rails"
+#介面化資料庫
+gem 'hirb-unicode'
