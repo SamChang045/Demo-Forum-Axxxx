@@ -15,6 +15,10 @@ class Post < ApplicationRecord
     self.collect_users.include?(user)
   end
 
+  def viewed_by?(user)
+    self.viewed_users.include?(user)
+  end
+
   def self.readable_posts(user)
     Post.where(authority: "friend", user: user.all_friends).or(where(authority: "all")).or(where(authority: "myself", user: user)).or(where(user: user))
   end
