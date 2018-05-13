@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user! 
-  before_action :set_post, only: [:show, :edit, :update, :destroy, :edit_current_comment]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :collect, :uncollect, :edit_current_comment]
 
   def index
     @categories = Category.all
@@ -76,6 +76,21 @@ class PostsController < ApplicationController
     @comments = @post.comments.page(params[:page]).per(10)
     @comment = Comment.new
   end
+
+  def collect
+    @post.collections.create(user: current_user)
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def uncollect
+    @collect = @post.collections.find_by(user: current_user)
+    @collect.destroy
+    respond_to do |format|
+      format.js
+    end
+  end  
 
   def edit_current_comment
     @comment = @post.comments.find_by(id: params[:comment_id])
