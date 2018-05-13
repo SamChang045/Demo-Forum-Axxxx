@@ -61,9 +61,9 @@
             <td data-link="<%= post_path(post) %>"><%= post.title %></td>
             <td>
               <% if post.collected_by?(current_user) %>
-                <%= link_to "Uncollect", uncollect_post_path(post), remote: true, method: :post, class: "btn btn-sm btn-primary" %>
+                <%= link_to "Uncollect", uncollect_post_path(post), remote: true, method: :post, class: "btn btn-sm btn-primary", id: "uncollect-#{post.id}" %>
               <% else %>
-                <%= link_to "Collect", collect_post_path(post), remote: true, method: :post, class: "btn btn-sm btn-primary"%>
+                <%= link_to "Collect", collect_post_path(post), remote: true, method: :post, class: "btn btn-sm btn-primary", id: "collect-#{post.id}" %>
               <% end %>
             </td>
           </tr>
