@@ -30,4 +30,24 @@ class Api::V1::PostsController < ApplicationController
     end
   end
 
+  def create
+    @post = current_user.posts.build(post_params)
+    if @post.save
+      render json: {
+        message: "Post successfully.",
+        result: @post
+      }
+    else
+      render json: {
+        errors: @post.errors
+      }
+    end
+  end
+
+  private
+
+  def post_params
+    params.permit(:title, :content, :image, :public, :authority, :category_id)
+  end
+
 end
