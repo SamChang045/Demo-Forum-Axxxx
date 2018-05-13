@@ -1,5 +1,1 @@
 $("#user-<%= @user.id %>").remove();
-var friend = document.createElement("div");
-$(friend).addClass("col-sm-2 user-<%= @user.id %>");
-friend.innerHTML = "<%= j( render partial: "shared/user_item", locals: { user: @user } ) %>";
-$("#wait-friend").append(friend);

@@ -19,13 +19,15 @@ class User < ApplicationRecord
 
   has_many :friendships, -> {where status: true}, dependent: :destroy
   has_many :friends, through: :friendships
-  
+
   has_many :inverse_friendships, -> {where status: true}, class_name: "Friendship", foreign_key: "friend_id"
   has_many :inverse_friends, through: :inverse_friendships, source: :user
 
+  #我加的但對方還沒接受
   has_many :not_yet_accepted_by_friendships, -> {where status: false}, class_name: "Friendship", dependent: :destroy
   has_many :not_yet_accepted_by_friends, through: :not_yet_accepted_by_friendships, source: :friend
-  
+
+  #加我但我還沒回應
   has_many :not_yet_responded_to_friendships, -> {where status: false}, class_name: "Friendship", foreign_key: "friend_id", dependent: :destroy
   has_many :not_yet_responded_to_friends, through: :not_yet_responded_to_friendships, source: :user
 
@@ -34,7 +36,7 @@ class User < ApplicationRecord
   end
 
   def friend?(user)
-    self.friends.include?(user)
+    self.friends.include?(user) || self.inverse_friends.include?(user)
   end
 
   def being_ask_friend?(user)
