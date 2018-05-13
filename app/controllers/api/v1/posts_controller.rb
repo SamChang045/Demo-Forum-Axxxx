@@ -1,5 +1,6 @@
 class Api::V1::PostsController < ApiController
   before_action :authenticate_user!, except: :index
+  before_action :set_post, only: [:show, :update, :destroy]
 
   def index
     @posts = Post.all
@@ -9,7 +10,6 @@ class Api::V1::PostsController < ApiController
   end
 
   def show
-    @post = Post.find_by(id: params[:id])
     if !@post
       render json: {
         error: "ERROR",
@@ -64,6 +64,10 @@ class Api::V1::PostsController < ApiController
   end
 
   private
+
+  def set_post
+    @post = Post.find_by(id: params[:id])
+  end
 
   def post_params
     params.permit(:title, :content, :image, :public, :authority, :category_id)
