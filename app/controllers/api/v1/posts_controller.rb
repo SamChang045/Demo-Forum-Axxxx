@@ -1,14 +1,5 @@
-class Api::V1::PostsController < ApplicationController
+class Api::V1::PostsController < ApiController
   before_action :authenticate_user!, except: :index
-  before_action :authenticate_user_from_token!
-
-  def authenticate_user_from_token!
-    if params[:auth_token].present?
-      user = User.find_by_authentication_token(params[:auth_token])
-      # sign_in 是 Devise 的方法
-      sign_in(user, store: false) if user
-    end
-  end
 
   def index
     @posts = Post.all
