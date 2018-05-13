@@ -22,8 +22,8 @@
         <tr>
           <th><%= sort_link(@ransack, :comments_count, "Replied count", default_order: :desc) %></th>
           <th class="text-left">Title</th>
-          <th><%= sort_link(@ransack, "Last replied at", default_order: :desc) %></th>
-          <th><%= sort_link(@ransack, "Viewed count", default_order: :desc) %></th>
+          <th><%= sort_link(@ransack, :last_replied_at, "Last replied at", default_order: :desc) %></th>
+          <th><%= sort_link(@ransack, :viewed_count, "Viewed count", default_order: :desc) %></th>     
         </tr>
       </thead>
       <tbody>
