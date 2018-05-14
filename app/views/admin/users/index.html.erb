@@ -21,9 +21,9 @@
       </thead>
       <tbody>
         <% @users.each do |user| %>
-          <tr data-link="<%= user_path(user) %>">
-            <td class="text-left"><%= user.name %></td>
-            <td class="text-left"><%= user.email %></td>
+          <tr>
+            <td data-link="<%= user_path(user) %>"><%= user.name %></td>
+            <td data-link="<%= user_path(user) %>"><%= user.email %></td>
             <td>
               <%= form_tag admin_user_path(user), method: :patch, class: "form-inline" do %>
                 <%= select_tag :role, options_for_select([["Admin", "admin"], ["User", "normal"]], user.role), class: "form-control" %>
