@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :drafts, :comments, :collects, :friends]
   def show
-    @posts = @user.posts
+    @posts = @user.posts.readable_posts(current_user).where(public: true)
   end
 
   def update
