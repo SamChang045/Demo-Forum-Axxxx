@@ -7,12 +7,12 @@ namespace :dev do
       post = user.posts.build(
         title: FFaker::Book.unique.author,
         content: FFaker::Book.description,
-        image: File.open(Rails.root.join("public/fake_image/#{rand(1..16)}.jpeg")),
+        image: File.open(Rails.root.join("public/fake_image/#{rand(1..12)}.jpeg")),
         public: [true, true, true, false].sample,
-        authority: ["myself", "friend", "all"].sample,
-        category: Category.all.sample
+        authority: ["myself", "friend", "all"].sample
       )
       post.save
+      post.categories_posts.create(category: Category.all.sample)
     end
     puts "have created fake posts"
     puts "now you have #{Post.count} posts data"
