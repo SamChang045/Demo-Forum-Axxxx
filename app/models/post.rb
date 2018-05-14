@@ -1,6 +1,8 @@
 class Post < ApplicationRecord
   belongs_to :user
-  belongs_to :category, optional: true
+
+  has_many :categories_posts
+  has_many :categories, through: :categories_posts
 
   has_many :comments, dependent: :destroy
   has_many :commented_users, through: :comments, source: :user
