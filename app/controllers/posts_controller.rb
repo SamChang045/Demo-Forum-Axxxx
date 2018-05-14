@@ -7,16 +7,16 @@ class PostsController < ApplicationController
     if current_user
       if params[:category_id]
         @category = Category.find(params[:category_id])
-        @ransack = @category.posts.readable_posts(current_user).ransack(params[:q])
+        @ransack = @category.posts.readable_posts(current_user).where(public: true).ransack(params[:q])
       else
-        @ransack = Post.readable_posts(current_user).ransack(params[:q])
+        @ransack = Post.readable_posts(current_user).where(public: true).ransack(params[:q])
       end
     else
       if params[:category_id]
         @category = Category.find(params[:category_id])
-        @ransack = @category.posts.where(authority: "all").ransack(params[:q])
+        @ransack = @category.posts.where(public: true).where(authority: "all").ransack(params[:q])
       else
-        @ransack = Post.where(authority: "all").ransack(params[:q])
+        @ransack = Post.where(public: true).where(authority: "all").ransack(params[:q])
       end
     end
       @posts = @ransack.result(distinct: true).includes(:comments).page(params[:page]).per(20)

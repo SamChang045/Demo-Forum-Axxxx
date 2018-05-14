@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   end
 
   def drafts
-    @drafts = @user.posts
+    @drafts = @user.posts.where(public: false)
   end
 
   def friends
