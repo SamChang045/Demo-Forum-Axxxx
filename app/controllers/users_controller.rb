@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :drafts, :comments, :collects, :friends]
+  before_action :check_user, except: [:show]
+
   def show
     @posts = @user.posts.readable_posts(current_user).where(public: true)
   end
@@ -36,4 +38,11 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :description, :avatar)
   end
+
+  def check_user
+    unless @user == current_user
+      flash[:alert] = "This is not your profile."
+      redirect_to user_path(@user)
+    end
+  end  
 end
